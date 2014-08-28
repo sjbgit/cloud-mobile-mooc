@@ -50,7 +50,7 @@ public final class VideoUploadController {
 		//videoDataMgr = VideoFileManager.get();
 	}
 	
-	@RequestMapping(value=VIDEO_SVC_PATH, method=RequestMethod.GET)
+	@RequestMapping(value=VIDEO_DATA_PATH, method=RequestMethod.GET)
     public HttpServletResponse getData(@PathVariable(ID_PARAMETER) Long id, HttpServletResponse response) {
 		if (videos.containsKey(id) == false) {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
