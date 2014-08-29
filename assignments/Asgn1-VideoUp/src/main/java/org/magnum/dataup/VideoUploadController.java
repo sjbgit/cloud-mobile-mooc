@@ -51,12 +51,13 @@ public final class VideoUploadController {
 	}
 	
 	@RequestMapping(value=VIDEO_DATA_PATH, method=RequestMethod.GET)
-    public HttpServletResponse getData(@PathVariable(ID_PARAMETER) Long id, HttpServletResponse response) {
+    public HttpServletResponse getData(@PathVariable(ID_PARAMETER) Long id, HttpServletResponse response) throws IOException {
 		if (videos.containsKey(id) == false) {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		}
 		else {
-			
+			//Video video = videos.
+			serveSomeVideo(videos.get(id), response);
 		}
 		
 		return response;
@@ -99,6 +100,14 @@ public final class VideoUploadController {
 		VideoFileManager.get().saveVideoData(video, videoData.getInputStream());
 
    }
+	
+	public void serveSomeVideo(Video v, HttpServletResponse response) throws IOException {
+        // Of course, you would need to send some headers, etc. to the
+        // client too!
+        //  ...
+		VideoFileManager.get().copyVideoData(v, response.getOutputStream());
+   }
+
 
 	
 	private static final AtomicLong currentId = new AtomicLong(0L);
