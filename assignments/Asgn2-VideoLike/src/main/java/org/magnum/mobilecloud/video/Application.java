@@ -76,6 +76,8 @@ public class Application extends RepositoryRestMvcConfiguration {
 	//
 	//       http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html
 	//
+	
+	
     @Bean
     EmbeddedServletContainerCustomizer containerCustomizer(
             @Value("${keystore.file:src/main/resources/private/keystore}") String keystoreFile,
@@ -112,5 +114,5 @@ public class Application extends RepositoryRestMvcConfiguration {
 			}
         };
     }
-	
+    
 }
