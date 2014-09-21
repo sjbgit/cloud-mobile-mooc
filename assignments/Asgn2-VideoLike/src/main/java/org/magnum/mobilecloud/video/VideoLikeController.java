@@ -27,6 +27,7 @@ import org.magnum.mobilecloud.video.repository.Video;
 import org.magnum.mobilecloud.video.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -70,6 +71,23 @@ public class VideoLikeController {
                                                                                                                                                                                                                                                                         
 	 * 
 	 */
+	
+	@RequestMapping(value=VideoSvcApi.VIDEO_SVC_PATH, method=RequestMethod.POST)
+	public @ResponseBody Video addVideo(@RequestBody Video v){		 
+		 videos.save(v);
+		 return v;
+		 //return true;
+	}
+	
+	/*
+	@RequestMapping(value=VideoSvcApi.VIDEO_SVC_PATH, method=RequestMethod.POST)
+    public @ResponseBody Video addVideo(@RequestBody Video v){
+		Video entity = save(v);
+		entity.setDataUrl(getDataUrl(v.getId()));
+		//v.setDataUrl(dataUrl);
+		return v;
+	}
+	*/
 	
 	@RequestMapping(value=VideoSvcApi.VIDEO_SVC_PATH, method=RequestMethod.GET)
     public @ResponseBody Collection<Video> getVideoList() {
