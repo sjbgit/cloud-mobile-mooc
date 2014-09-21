@@ -74,7 +74,11 @@ public class VideoLikeController {
 	@RequestMapping(value=VideoSvcApi.VIDEO_SVC_PATH, method=RequestMethod.GET)
     public @ResponseBody Collection<Video> getVideoList() {
 		//videos.put(1, 1000);
-		return Lists.newArrayList(videos.findAll());
+		
+		Iterable<Video> vids = videos.findAll();
+		return Lists.newArrayList(vids);
+		//THIS WORKS
+		//return Lists.newArrayList(videos.findAll());
 		//return videos.findAll();
 	}
 	
