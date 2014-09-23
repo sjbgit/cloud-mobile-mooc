@@ -1,5 +1,9 @@
 package org.magnum.mobilecloud.video.repository;
 
+import java.util.Set;
+import java.util.HashSet;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -82,6 +86,17 @@ public class Video {
 	
 	public void setLikes(long likes) {
 		this.likes = likes;
+	}
+	
+	@ElementCollection 
+	private Set likesUsernames = new HashSet(); 
+	
+	public Set getLikesUsernames() {
+		  return likesUsernames;
+	}
+
+	public void setLikesUsernames(Set likesUsernames) {
+		this.likesUsernames = likesUsernames;
 	}
 	
 	/**
