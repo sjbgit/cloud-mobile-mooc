@@ -79,6 +79,8 @@ public class VideoLikeController {
 		 //return true;
 	}
 	
+	//Principal p
+	
 	/*
 	@RequestMapping(value=VideoSvcApi.VIDEO_SVC_PATH, method=RequestMethod.POST)
     public @ResponseBody Video addVideo(@RequestBody Video v){
