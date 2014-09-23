@@ -89,13 +89,13 @@ public class Video {
 	}
 	
 	@ElementCollection 
-	private Set likesUsernames = new HashSet(); 
+	private Set<String> likesUsernames = new HashSet<String>(); 
 	
-	public Set getLikesUsernames() {
+	public Set<String> getLikesUsernames() {
 		  return likesUsernames;
 	}
 
-	public void setLikesUsernames(Set likesUsernames) {
+	public void setLikesUsernames(Set<String> likesUsernames) {
 		this.likesUsernames = likesUsernames;
 	}
 	

@@ -18,6 +18,7 @@
 
 package org.magnum.mobilecloud.video;
 
+import java.security.Principal;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,10 +28,14 @@ import org.magnum.mobilecloud.video.repository.Video;
 import org.magnum.mobilecloud.video.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import retrofit.http.POST;
+import retrofit.http.Path;
 
 import com.google.common.collect.Lists;
 
@@ -79,7 +84,16 @@ public class VideoLikeController {
 		 //return true;
 	}
 	
+	@RequestMapping(value=VideoSvcApi.VIDEO_SVC_PATH + "/{id}/like", method=RequestMethod.POST)
+	public void likeVideo(@PathVariable("id") Long id, Principal p){
+		long x = id;
+		long y = x;
+	}
+	
 	//Principal p
+	//(@PathVariable(ID_PARAMETER) Long id,
+	//@POST(VIDEO_SVC_PATH + "/{id}/like")
+	//public Void likeVideo(@Path("id") long id);
 	
 	/*
 	@RequestMapping(value=VideoSvcApi.VIDEO_SVC_PATH, method=RequestMethod.POST)
