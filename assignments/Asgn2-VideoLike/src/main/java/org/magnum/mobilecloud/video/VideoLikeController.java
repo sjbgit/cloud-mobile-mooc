@@ -27,6 +27,8 @@ import org.magnum.mobilecloud.video.client.VideoSvcApi;
 import org.magnum.mobilecloud.video.repository.Video;
 import org.magnum.mobilecloud.video.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -85,9 +87,19 @@ public class VideoLikeController {
 	}
 	
 	@RequestMapping(value=VideoSvcApi.VIDEO_SVC_PATH + "/{id}/like", method=RequestMethod.POST)
-	public void likeVideo(@PathVariable("id") Long id, Principal p){
+	public ResponseEntity<Void> likeVideo(@PathVariable("id") Long id, Principal p){
+		
+		if (!videos.exists(id)) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		
 		long x = id;
 		long y = x;
+		String username = p.getName(); 
+		String z = username;
+		//p.getClass().
+		
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	//Principal p
