@@ -22,6 +22,7 @@ import java.security.Principal;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.magnum.mobilecloud.video.client.VideoSvcApi;
 import org.magnum.mobilecloud.video.repository.Video;
@@ -92,10 +93,20 @@ public class VideoLikeController {
 		if (!videos.exists(id)) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
+		String username = p.getName(); 
+		Video v = videos.findOne(id);
+		Set<String> likesUsernames = v.getLikesUsernames();  
+		if (likesUsernames.contains(username)) {
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		} 
 		
+		likesUsernames.add(username);
+		v.setLikesUsernames(likesUsernames);
+		v.setLikes(likesUsernames.size());
+		videos.save(v);
 		long x = id;
 		long y = x;
-		String username = p.getName(); 
+		//String username = p.getName(); 
 		String z = username;
 		//p.getClass().
 		
