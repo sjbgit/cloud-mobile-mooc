@@ -182,6 +182,29 @@ public class VideoLikeController {
 		//return videos.findAll();
 	}
 	
+	//@GET(VIDEO_SVC_PATH + "/{id}/likedby")
+	//public Collection<String> getUsersWhoLikedVideo(@Path("id") long id);
+	
+	@RequestMapping(value=VideoSvcApi.VIDEO_SVC_PATH + "/{id}/likedby", method=RequestMethod.GET)
+    public @ResponseBody Collection<String> getUsersWhoLikedVideo(@PathVariable("id") Long id) {
+		//videos.put(1, 1000);
+		
+		if (!videos.exists(id)) {
+			return Lists.newArrayList();
+		}
+		
+		Video v = videos.findOne(id);
+		return Lists.newArrayList(v.getLikesUsernames());
+		
+		//Set<String> likesUsernames = v.getLikesUsernames();
+		
+		//Iterable<Video> vids = videos.findAll();
+		//return Lists.newArrayList(vids);
+		//THIS WORKS
+		//return Lists.newArrayList(videos.findAll());
+		//return videos.findAll();
+	}
+	
 	@RequestMapping(value="/go1",method=RequestMethod.GET)
 	public @ResponseBody String goodLuck(){
 		return "Good Luck! ";
