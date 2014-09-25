@@ -220,6 +220,18 @@ public class VideoLikeController {
 	}
 	
 	
+	//@GET(VIDEO_DURATION_SEARCH_PATH)
+	//public Collection<Video> findByDurationLessThan(@Query(DURATION_PARAMETER) long duration);
+	
+	@RequestMapping(value=VideoSvcApi.VIDEO_DURATION_SEARCH_PATH, method=RequestMethod.GET)
+	public @ResponseBody Collection<Video> findByDurationLessThan(
+			// Tell Spring to use the "title" parameter in the HTTP request's query
+			// string as the value for the title method parameter
+			@RequestParam(VideoSvcApi.DURATION_PARAMETER) Long duration
+	){
+		return videos.findByDurationLessThan(duration);
+	}
+	
 	@RequestMapping(value="/go1",method=RequestMethod.GET)
 	public @ResponseBody String goodLuck(){
 		return "Good Luck! ";
