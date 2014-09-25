@@ -37,6 +37,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
 
@@ -85,6 +86,48 @@ public class VideoLikeController {
 		 videos.save(v);
 		 return v;
 		 //return true;
+	}
+	
+	//@GET(VIDEO_SVC_PATH + "/{id}")
+	//public Video getVideoById(@Path("id") long id);
+	
+	@RequestMapping(value=VideoSvcApi.VIDEO_SVC_PATH + "/{id}", method=RequestMethod.GET)
+	public ResponseEntity<Video> getVideoById(@PathVariable("id") Long id){	
+		
+		if (!videos.exists(id)) {
+			return new ResponseEntity<Video>(HttpStatus.NOT_FOUND);
+		}
+		
+		Video v = videos.findOne(id);
+		return new ResponseEntity<Video>(v, HttpStatus.OK);
+		 //videos.save(v);
+		 //return v;
+		 //return true;
+	}
+	
+	//@POST(VIDEO_SVC_PATH + "/{id}/unlike")
+	//public Void unlikeVideo(@Path("id") long id);
+	
+	@RequestMapping(value=VideoSvcApi.VIDEO_SVC_PATH + "/{id}/unlike", method=RequestMethod.POST)
+	public ResponseEntity<Void> unlikeVideo(@PathVariable("id") Long id, Principal p){
+		if (!videos.exists(id)) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		String username = p.getName(); 
+		Video v = videos.findOne(id);
+		Set<String> likesUsernames = v.getLikesUsernames();  
+		if (!likesUsernames.contains(username)) {
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		} 
+		
+		likesUsernames.remove(username); //contains(username)
+		
+		v.setLikesUsernames(likesUsernames);
+		v.setLikes(likesUsernames.size());
+		videos.save(v);
+		
+		return new ResponseEntity<Void>(HttpStatus.OK);
+		
 	}
 	
 	@RequestMapping(value=VideoSvcApi.VIDEO_SVC_PATH + "/{id}/like", method=RequestMethod.POST)
