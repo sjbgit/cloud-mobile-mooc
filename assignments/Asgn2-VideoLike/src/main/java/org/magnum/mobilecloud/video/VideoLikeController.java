@@ -35,11 +35,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
+import retrofit.http.Query;
 
 import com.google.common.collect.Lists;
 
@@ -204,6 +206,19 @@ public class VideoLikeController {
 		//return Lists.newArrayList(videos.findAll());
 		//return videos.findAll();
 	}
+	
+	//@GET(VIDEO_TITLE_SEARCH_PATH)
+	//public Collection<Video> findByTitle(@Query(TITLE_PARAMETER) String title);
+	
+	@RequestMapping(value=VideoSvcApi.VIDEO_TITLE_SEARCH_PATH, method=RequestMethod.GET)
+	public @ResponseBody Collection<Video> findByTitle(
+			// Tell Spring to use the "title" parameter in the HTTP request's query
+			// string as the value for the title method parameter
+			@RequestParam(VideoSvcApi.TITLE_PARAMETER) String title
+	){
+		return videos.findByName(title);
+	}
+	
 	
 	@RequestMapping(value="/go1",method=RequestMethod.GET)
 	public @ResponseBody String goodLuck(){
